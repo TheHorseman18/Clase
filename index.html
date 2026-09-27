@@ -1,24 +1,265 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primera Pagina</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pixel Abierto: aprendizaje accesible de programación y desarrollo de videojuegos.">
+  <title>Pixel Abierto | Aprende, accede y crea</title>
+  <style>
+    :root{
+      --navy:#122340; --blue:#2d6fb4; --cyan:#4dbecb;
+      --yellow:#f4b441; --cream:#f4f6fa; --white:#fff;
+      --text:#232b37; --muted:#5d6978; --border:#dce4ed;
+      --focus:#111;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--white);line-height:1.6}
+    a{color:var(--blue)}
+    a:focus,button:focus{outline:4px solid var(--focus);outline-offset:3px}
+    .skip{position:absolute;left:-9999px;top:10px;background:#fff;color:#111;padding:10px 16px;z-index:100}
+    .skip:focus{left:10px}
+    header{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20}
+    .nav{max-width:1180px;margin:auto;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .logo{font-weight:800;color:var(--navy);font-size:1.35rem;text-decoration:none;letter-spacing:.3px}
+    .logo span{color:var(--cyan)}
+    nav ul{list-style:none;display:flex;gap:24px;margin:0;padding:0;flex-wrap:wrap}
+    nav a{text-decoration:none;color:var(--text);font-weight:700;font-size:.95rem}
+    nav a:hover{color:var(--blue)}
+    .hero{background:
+      linear-gradient(135deg,rgba(18,35,64,.96),rgba(45,111,180,.88)),
+      radial-gradient(circle at 80% 30%,rgba(77,190,203,.7),transparent 28%);
+      color:#fff}
+    .hero-inner{max-width:1180px;margin:auto;min-height:470px;padding:70px 22px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:50px}
+    .eyebrow{display:inline-block;background:rgba(77,190,203,.18);border:1px solid rgba(255,255,255,.25);padding:7px 13px;border-radius:999px;font-weight:700}
+    h1{font-size:clamp(2.4rem,6vw,4.7rem);line-height:1.02;margin:18px 0}
+    .hero p{font-size:1.15rem;max-width:650px;color:#eef5ff}
+    .buttons{display:flex;gap:13px;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-block;padding:13px 20px;border-radius:8px;text-decoration:none;font-weight:800;border:2px solid transparent}
+    .btn-primary{background:var(--yellow);color:#172238}
+    .btn-secondary{background:#fff;color:var(--navy)}
+    .visual{min-height:280px;border-radius:22px;background:linear-gradient(145deg,#1b3155,#0c1830);border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;box-shadow:0 18px 50px rgba(0,0,0,.25)}
+    .gamepad{width:250px;height:145px;background:#eaf4ff;border-radius:75px;position:relative;box-shadow:0 0 0 12px rgba(77,190,203,.18)}
+    .gamepad:before,.gamepad:after{content:"";position:absolute;background:#122340;border-radius:50%}
+    .gamepad:before{width:20px;height:70px;left:65px;top:37px;box-shadow:25px 25px 0 -3px #122340}
+    .gamepad:after{width:22px;height:22px;right:58px;top:48px;box-shadow:28px 17px 0 -3px #2d6fb4}
+    section{padding:75px 22px}
+    .container{max-width:1180px;margin:auto}
+    .section-head{text-align:center;max-width:760px;margin:0 auto 40px}
+    h2{font-size:2.1rem;color:var(--navy);margin:0 0 10px}
+    .section-head p{color:var(--muted)}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .card{border:1px solid var(--border);border-radius:15px;padding:27px;background:#fff;box-shadow:0 8px 25px rgba(18,35,64,.06)}
+    .icon{font-size:2rem}
+    .card h3{color:var(--navy);margin:12px 0 7px}
+    .card p{color:var(--muted);margin:0}
+    .access{background:var(--cream)}
+    .access-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .principle{background:#fff;border-radius:14px;padding:22px;border-top:5px solid var(--blue)}
+    .principle:nth-child(2){border-color:var(--cyan)}
+    .principle:nth-child(3){border-color:var(--yellow)}
+    .principle:nth-child(4){border-color:#7b61a8}
+    .principle strong{font-size:1.15rem;color:var(--navy)}
+    .courses{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .course{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff}
+    .course-top{height:130px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;color:#fff;font-size:3rem}
+    .course-body{padding:22px}
+    .course h3{margin-top:0;color:var(--navy)}
+    .course p{color:var(--muted)}
+    .course .btn{padding:9px 13px;font-size:.9rem}
+    .about{background:var(--navy);color:#fff}
+    .about h2{color:#fff}
+    .about p{color:#e5edf7;max-width:800px}
+    .contact{background:var(--cream)}
+    form{max-width:700px;margin:auto;background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px}
+    label{display:block;font-weight:800;margin:14px 0 6px;color:var(--navy)}
+    input,textarea{width:100%;padding:13px;border:2px solid #bcc9d8;border-radius:7px;font:inherit}
+    textarea{min-height:120px;resize:vertical}
+    button{margin-top:18px;padding:13px 20px;background:var(--blue);color:#fff;border:0;border-radius:8px;font-weight:800;font-size:1rem;cursor:pointer}
+    .status{margin-top:12px;font-weight:700}
+    footer{background:#0c1830;color:#dce8f5;text-align:center;padding:28px 22px}
+    footer a{color:#fff}
+    .small{font-size:.92rem;color:var(--muted)}
+    @media(max-width:900px){
+      .hero-inner{grid-template-columns:1fr}
+      .cards,.courses{grid-template-columns:1fr 1fr}
+      .access-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:620px){
+      .nav{align-items:flex-start;flex-direction:column}
+      nav ul{gap:12px}
+      .hero-inner{padding-top:50px}
+      .cards,.courses,.access-grid{grid-template-columns:1fr}
+      section{padding:55px 18px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+    }
+  </style>
 </head>
 <body>
-    <h1>Level Designer Quick Start</h1>
-    <p>Get up and running with the basics of the Unreal Editor.</p>
-    <img src="https://dev.epicgames.com/community/api/documentation/image/7c107d9c-8fcf-43c2-a351-c3f5ae28ce77?resizing_type=fill&width=1920&height=335"" srcset="">
-    <h2>Prerequisite topics</h2>
-    <p>In order to understand and use the content on this page, make sure you are familiar with the following topics:</p>
-    <ul>
-        <li><a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/installing-unreal-engine">Installing Unreal Engine</a></li>
-        <li><a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/creating-a-new-project-in-unreal-engine">Creating a New Project</a></li>
-    </ul>
- 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<a class="skip" href="#contenido">Saltar al contenido principal</a>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="#inicio" aria-label="Pixel Abierto, ir al inicio">PIXEL <span>ABIERTO</span></a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#accesibilidad">Accesibilidad</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+  <section class="hero" id="inicio" aria-labelledby="titulo">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">Tecnología · Educación · Inclusión</span>
+        <h1 id="titulo">Aprende a crear videojuegos.</h1>
+        <p>Educación tecnológica accesible para jóvenes que quieren aprender programación, desarrollar proyectos y descubrir nuevas oportunidades.</p>
+        <div class="buttons">
+          <a class="btn btn-primary" href="#cursos">Conoce los cursos</a>
+          <a class="btn btn-secondary" href="#accesibilidad">Cómo hacemos el sitio accesible</a>
+        </div>
+      </div>
+      <div class="visual" role="img" aria-label="Ilustración decorativa de un control de videojuegos">
+        <div class="gamepad" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="propuesta">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="propuesta">Una forma más inclusiva de aprender</h2>
+        <p>Pixel Abierto combina formación práctica, materiales claros y acompañamiento para reducir barreras de acceso al aprendizaje tecnológico.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="icon" aria-hidden="true">🎮</div>
+          <h3>Aprende</h3>
+          <p>Programación y desarrollo de videojuegos desde cero, con actividades prácticas.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">♿</div>
+          <h3>Accede</h3>
+          <p>Recursos diseñados considerando diferentes necesidades de percepción, navegación y comprensión.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">💡</div>
+          <h3>Crea</h3>
+          <p>Convierte lo aprendido en pequeños proyectos y comparte tus avances con la comunidad.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="access" id="accesibilidad" aria-labelledby="pour">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="pour">Diseñado con POUR</h2>
+        <p>La propuesta aplica los cuatro principios de accesibilidad: Perceptible, Operable, Comprensible y Robusto.</p>
+      </div>
+      <div class="access-grid">
+        <article class="principle">
+          <strong>01 · Perceptible</strong>
+          <p>Contraste claro, texto legible, estructura con encabezados y descripciones para elementos visuales.</p>
+        </article>
+        <article class="principle">
+          <strong>02 · Operable</strong>
+          <p>Navegación consistente, enlaces descriptivos, botones identificables y acceso mediante teclado.</p>
+        </article>
+        <article class="principle">
+          <strong>03 · Comprensible</strong>
+          <p>Lenguaje sencillo, instrucciones directas y organización predecible del contenido.</p>
+        </article>
+        <article class="principle">
+          <strong>04 · Robusto</strong>
+          <p>HTML semántico, diseño adaptable y compatibilidad con distintos dispositivos y tecnologías de asistencia.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="cursos" aria-labelledby="titulo-cursos">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="titulo-cursos">Cursos destacados</h2>
+        <p>Opciones introductorias para comenzar a crear.</p>
+      </div>
+      <div class="courses">
+        <article class="course">
+          <div class="course-top" aria-hidden="true">⌨</div>
+          <div class="course-body">
+            <h3>Programación desde cero</h3>
+            <p>Conceptos básicos de lógica, variables, condiciones y funciones.</p>
+            <a class="btn btn-primary" href="#contacto">Me interesa</a>
+          </div>
+        </article>
+        <article class="course">
+          <div class="course-top" aria-hidden="true">🕹</div>
+          <div class="course-body">
+            <h3>Primer videojuego</h3>
+            <p>Aprende las bases para construir una experiencia interactiva sencilla.</p>
+            <a class="btn btn-primary" href="#contacto">Me interesa</a>
+          </div>
+        </article>
+        <article class="course">
+          <div class="course-top" aria-hidden="true">🚀</div>
+          <div class="course-body">
+            <h3>Proyecto final</h3>
+            <p>Desarrolla una idea propia y aprende a presentarla como proyecto.</p>
+            <a class="btn btn-primary" href="#contacto">Me interesa</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="nosotros" aria-labelledby="titulo-nosotros">
+    <div class="container">
+      <h2 id="titulo-nosotros">¿Qué es Pixel Abierto?</h2>
+      <p>Es una propuesta de negocio inclusivo que busca acercar la educación en programación y desarrollo de videojuegos a jóvenes que enfrentan barreras económicas o de accesibilidad. Su modelo combina cursos accesibles, becas patrocinadas, convenios y materiales digitales.</p>
+    </div>
+  </section>
+
+  <section class="contact" id="contacto" aria-labelledby="titulo-contacto">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="titulo-contacto">Contáctanos</h2>
+        <p>Déjanos un mensaje para conocer los cursos o solicitar información.</p>
+      </div>
+      <form id="contactForm">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" autocomplete="name" required>
+        <label for="correo">Correo electrónico</label>
+        <input id="correo" name="correo" type="email" autocomplete="email" required>
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" required></textarea>
+        <button type="submit">Enviar mensaje</button>
+        <p id="formStatus" class="status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p><strong>Pixel Abierto</strong> · Tecnología, educación e inclusión.</p>
+  <p class="small">Sitio demostrativo para la Actividad 2 · Metodología POUR.</p>
+</footer>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('formStatus').textContent =
+      'Gracias. Este formulario es demostrativo y tu mensaje ha sido preparado correctamente.';
+    this.reset();
+  });
+</script>
 </body>
 </html>
- 
- 
